@@ -15,23 +15,42 @@ app.use(bodyParser.urlencoded({
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/userDB");
 
+//create a user Schema and mongoose model
+
+const userSchema = new mongoose.Schema ({
+  email: String,
+  password: String
+});
+
+const User = new mongoose.model("User", userSchema);
+
+
+
 
 //create a get route
 
-app.get("/", (req,res)=>{
+app.get("/", (req, res) => {
   res.render("home")
 })
 
-app.get("/login", (req,res)=>{
+app.get("/login", (req, res) => {
   res.render("login")
 })
 
-app.get("/register", (req,res)=>{
+app.get("/register", (req, res) => {
   res.render("register")
 })
 
 
-
+app.post("/register", (req,res)=>{
+  const newUser = new User({
+    email:req.body.username,
+    password:req.body.password
+  });
+  newUser.save((err)=>{
+    err?console.log(err):res.render("secrets");
+  })
+})
 
 
 
