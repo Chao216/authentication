@@ -152,3 +152,9 @@ when client makes a specific post request to server, the server will send cookie
 session is period of time you don't need to re-enter your password to browse the website.
 
 after login session starts and cookies created, after logout, session over and cookies destoried,
+
+##### packages for this lesson
+1. passport
+2. passport-local
+3. passport-local-mongoose
+4. express-session
