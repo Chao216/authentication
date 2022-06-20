@@ -125,3 +125,21 @@ bcrypt.compare(myPlaintextPassword, hash, function(err, result) {
     // result == true
 });
 ```
+
+in our app it looks like
+
+```javascript
+app.post("/login", (req,res)=>{
+  User.findOne({email:req.body.username}, (err,target)=>{
+    if (err){console.log(err)} else {
+      if (target){ //we found such a username in our database
+        // Load hash from your password DB.
+bcrypt.compare(req.body.password, target.password, function(err, result) { //now we compare password clients entered, and the password we found in database
+
+    if (result){res.render("secrets")} // if results is true we render secrets page.
+});
+      }
+    }
+  })
+})
+```

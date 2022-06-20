@@ -71,10 +71,12 @@ app.post("/register", (req, res) => {
 app.post("/login", (req,res)=>{
   User.findOne({email:req.body.username}, (err,target)=>{
     if (err){console.log(err)} else {
-      if (target){
-        if(target.password===md5(req.body.password)){
-          res.render("secrets")
-        }
+      if (target){ //we found such a username in our database
+        // Load hash from your password DB.
+bcrypt.compare(req.body.password, target.password, function(err, result) { //now we compare password clients entered, and the password we found in database
+
+    if (result){res.render("secrets")} // if results is true we render secrets page.
+});
       }
     }
   })
