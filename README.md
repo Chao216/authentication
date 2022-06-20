@@ -24,3 +24,5 @@ var secret = process.env.SOME_LONG_UNGUESSABLE_STRING;
 userSchema.plugin(encrypt, { secret: secret , encryptedFields:["password"]});
 ```
 note , put the plugin after Schema and before Model. to optionally encrypt files, add `encryptedFields:["password"]`
+
+mongoose-encryption will encrypt when save(), and decrypt when find().
