@@ -158,3 +158,12 @@ after login session starts and cookies created, after logout, session over and c
 2. passport-local
 3. passport-local-mongoose
 4. express-session
+
+install and require them
+
+```javascript
+const session = require('express-session');
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+//don't need to require passport-local, it is a dependency
+```
