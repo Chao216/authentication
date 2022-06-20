@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+const encrypt = require("mongoose-encryption");
 //load mongoose and connect to database
 
 const mongoose = require("mongoose");
@@ -21,6 +22,9 @@ const userSchema = new mongoose.Schema({
   email: String,
   password: String
 });
+
+const secret = "Mr Sherlock Holmes VS Mr Poriot";
+userSchema.plugin(encrypt, {secret:secret});
 
 const User = new mongoose.model("User", userSchema);
 
