@@ -167,3 +167,13 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 //don't need to require passport-local, it is a dependency
 ```
+
+use the session package before mongoose connect
+
+```javascript
+app.use(session({
+  secret:"this is just my temporary secret",
+  resave:false,
+  saveUninitialized:false
+}));
+```

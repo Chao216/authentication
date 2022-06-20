@@ -13,6 +13,14 @@ app.use(bodyParser.urlencoded({
 const session = require('express-session');
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
+//don't need to require passport-local, it is a dependency
+
+
+app.use(session({
+  secret:"this is just my temporary secret",
+  resave:false,
+  saveUninitialized:false
+}));
 
 //load mongoose and connect to database
 
