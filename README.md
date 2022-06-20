@@ -143,3 +143,12 @@ bcrypt.compare(req.body.password, target.password, function(err, result) { //now
   })
 })
 ```
+
+
+### level 5 cookies and sessions
+
+when client makes a specific post request to server, the server will send cookies to client. in future, when client send get request to server again, the cookies will go to server also.
+
+session is period of time you don't need to re-enter your password to browse the website.
+
+after login session starts and cookies created, after logout, session over and cookies destoried,
