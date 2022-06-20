@@ -10,6 +10,11 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+//load mongoose and connect to database
+
+const mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost:27017/userDB");
+
 
 //create a get route
 
