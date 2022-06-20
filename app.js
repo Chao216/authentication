@@ -22,6 +22,8 @@ app.use(session({
   saveUninitialized:false
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
 //load mongoose and connect to database
 
 const mongoose = require("mongoose");

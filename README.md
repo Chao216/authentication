@@ -177,3 +177,10 @@ app.use(session({
   saveUninitialized:false
 }));
 ```
+
+and then append follwing for passport packages  
+```javascript
+app.use(passport.initialize());
+app.use(passport.session());
+
+```
