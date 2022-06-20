@@ -11,6 +11,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+const bcrypt = require("bcrypt");
+const saltRounds=10;
 console.log(process.env.SECRET);
 
 
@@ -50,14 +52,19 @@ app.get("/register", (req, res) => {
 
 //create post for register
 app.post("/register", (req, res) => {
-  const newUser = new User({
-    email: req.body.username,
-    password: md5(req.body.password)
-  });
-  newUser.save((err) => {
-    err ? console.log(err) : res.render("secrets");
+
+  bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    // Store hash in your password DB.
+    const newUser = new User({
+      email: req.body.username,
+      password: hash
+    });
+    newUser.save((err) => {
+      err ? console.log(err) : res.render("secrets");
+    })
   })
-})
+
+});
 
 //create post for login
 

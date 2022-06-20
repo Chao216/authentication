@@ -83,3 +83,45 @@ app.post("/login", (req,res)=>{
 
 
 salting means append  a randomly generated set of string to your password before the hash function.
+
+install and require `bcrypt` and set value for saltRounds.
+
+```javascript
+const bcrypt = require("bcrypt");
+const saltRounds=10;
+```
+the hash value is accessible in the callback function
+
+```javascript
+bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+    // Store hash in your password DB.
+});
+```
+
+in our case, our plainPassword is `req.body.password`, and we use the hash in callback function to save new user document.
+
+```javascript
+app.post("/register", (req, res) => {
+
+  bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    // Store hash in your password DB.
+    const newUser = new User({
+      email: req.body.username,
+      password: hash
+    });
+    newUser.save((err) => {
+      err ? console.log(err) : res.render("secrets");
+    })
+  })
+
+});
+```
+
+for login route we can check the hash
+
+```javascript
+// Load hash from your password DB.
+bcrypt.compare(myPlaintextPassword, hash, function(err, result) {
+    // result == true
+});
+```
