@@ -12,3 +12,5 @@ again create a post method for login, if no error and find username match a reco
 
 
 ### level 2 encryption for your password in your database
+
+#### mongoose-encryption is a npm package for encrypte MongoDB
