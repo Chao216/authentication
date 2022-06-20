@@ -11,4 +11,4 @@ create post method for register , after saving their email and password, render 
 again create a post method for login, if no error and find username match a record in DB, also if password match record's password, render the secrets page.
 
 
-### encryption for your password in your database
+### level 2 encryption for your password in your database
