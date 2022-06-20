@@ -46,3 +46,4 @@ put your key value pairs in `.env`
 SECRET_KEY=YOURSECRETKEYGOESHERE # comment
 SECRET_HASH="something-with-a-#-hash"
 ```
+to fetch the value in .env  you can call with `process.env.KEY`
