@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
 });
 
 const secret = "Mr Sherlock Holmes VS Mr Poriot";
-userSchema.plugin(encrypt, {secret:secret});
+userSchema.plugin(encrypt, {secret:secret, encryptedFields:["password"]});
 
 const User = new mongoose.model("User", userSchema);
 

@@ -21,6 +21,6 @@ add the encrypt package as a plugin for mongoose.
 
 ```javascript
 var secret = process.env.SOME_LONG_UNGUESSABLE_STRING;
-userSchema.plugin(encrypt, { secret: secret });
+userSchema.plugin(encrypt, { secret: secret , encryptedFields:["password"]});
 ```
-note , put the plugin after Schema and before Model.
+note , put the plugin after Schema and before Model. to optionally encrypt files, add `encryptedFields:["password"]`
