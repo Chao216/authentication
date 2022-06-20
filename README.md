@@ -184,3 +184,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 ```
+add the plugin between mongooseChema and Model
+```javascript
+const User = new mongoose.model("User", userSchema);
+```
