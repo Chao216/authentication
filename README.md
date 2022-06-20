@@ -47,3 +47,34 @@ SECRET_KEY=YOURSECRETKEYGOESHERE # comment
 SECRET_HASH="something-with-a-#-hash"
 ```
 to fetch the value in .env  you can call with `process.env.KEY`
+
+### level 3 hashing password
+
+has function is almost impossible to reverse at current computing power
+
+install `md5` package and require it
+
+just use `md5` as a method to hash your info
+```javascript
+const newUser = new User({
+  email: req.body.username,
+  password: md5(req.body.password)
+});
+```
+the password stored in db will be like `d8578edf8458ce06fbc5bb76a58c5ca4`
+
+the trick for login is also `md5` the password user imputed.
+
+```javascript
+app.post("/login", (req,res)=>{
+  User.findOne({email:req.body.username}, (err,target)=>{
+    if (err){console.log(err)} else {
+      if (target){
+        if(target.password===md5(req.body.password)){
+          res.render("secrets")
+        }
+      }
+    }
+  })
+})
+```
