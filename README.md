@@ -80,3 +80,6 @@ app.post("/login", (req,res)=>{
 ```
 
 ### level 4 hashing and slating.
+
+
+salting means append  a randomly generated set of string to your password before the hash function.
