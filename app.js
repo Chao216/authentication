@@ -17,7 +17,7 @@ mongoose.connect("mongodb://localhost:27017/userDB");
 
 //create a user Schema and mongoose model
 
-const userSchema = new mongoose.Schema ({
+const userSchema = new mongoose.Schema({
   email: String,
   password: String
 });
@@ -41,21 +41,33 @@ app.get("/register", (req, res) => {
   res.render("register")
 })
 
-
-app.post("/register", (req,res)=>{
+//create post for register
+app.post("/register", (req, res) => {
   const newUser = new User({
-    email:req.body.username,
-    password:req.body.password
+    email: req.body.username,
+    password: req.body.password
   });
-  newUser.save((err)=>{
-    err?console.log(err):res.render("secrets");
+  newUser.save((err) => {
+    err ? console.log(err) : res.render("secrets");
   })
 })
 
+//create post for login
 
-
-const port = process.env.PORT || 3000;
-
-app.listen(port, (req, res) => {
-  console.log("server started on port" + port);
+app.post("/login", (req,res)=>{
+  User.findOne({email:req.body.username}, (err,target)=>{
+    if (err){console.log(err)} else {
+      if (target){
+        if(target.password===req.body.password){
+          res.render("secrets")
+        }
+      }
+    }
+  })
 })
+
+    const port = process.env.PORT || 3000;
+
+    app.listen(port, (req, res) => {
+      console.log("server started on port" + port);
+    });
