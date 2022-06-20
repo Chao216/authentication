@@ -26,3 +26,13 @@ userSchema.plugin(encrypt, { secret: secret , encryptedFields:["password"]});
 note , put the plugin after Schema and before Model. to optionally encrypt files, add `encryptedFields:["password"]`
 
 mongoose-encryption will encrypt when save(), and decrypt when find().
+
+
+### environment variable
+
+use node package `dotenv`
+
+and put this on top of you app.
+```javascript
+require('dotenv').config()
+```
