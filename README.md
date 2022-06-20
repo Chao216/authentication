@@ -36,3 +36,13 @@ and put this on top of you app.
 ```javascript
 require('dotenv').config()
 ```
+
+touch a `.env` file in root folder of the project.
+
+put your key value pairs in `.env`
+
+```
+# This is a comment
+SECRET_KEY=YOURSECRETKEYGOESHERE # comment
+SECRET_HASH="something-with-a-#-hash"
+```
