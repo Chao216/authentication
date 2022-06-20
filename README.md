@@ -10,3 +10,5 @@ create a Database and User collection with Mongoose Schema and model, save the `
 create post method for register , after saving their email and password, render secrets page
 
 again create a post method for login, if no error and find username match a record in DB, also if password match record's password, render the secrets page.
+---
+### encryption for your password in your database 
