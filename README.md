@@ -188,3 +188,12 @@ add the plugin between mongooseChema and Model
 ```javascript
 const User = new mongoose.model("User", userSchema);
 ```
+
+the next step is about serialize , put this after the mongoose model we created
+
+```javascript
+passport.use(User.createStrategy());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+```
