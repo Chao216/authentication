@@ -186,6 +186,8 @@ app.use(passport.session());
 ```
 add the plugin between mongooseChema and Model
 ```javascript
+
+userSchema.plugin(passportLocalMongoose);
 const User = new mongoose.model("User", userSchema);
 ```
 
