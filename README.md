@@ -266,3 +266,13 @@ app.get('/logout', (req, res)=>{
 ```
 
 note , the logout method requires a callback function now. just add a callback to log err if needed.
+
+## level 6 third party OAuth 2.0
+
+OAuth = Open Authorization
+
+
+install google oauth packages
+```shell
+$ npm install passport-google-oauth20
+```
