@@ -67,6 +67,17 @@ app.get("/secrets", (req,res)=>{
   req.isAuthenticated()?res.render("secrets"): res.redirect("/login") //use isAuthenticated to check if the request is allowed.
 })
 
+//create a app.get() for logout
+
+app.get('/logout', (req, res)=>{
+  req.logout(function(err){ //logout requires a callback function 
+    if (err){
+      console.log(err);
+    } else {res.redirect('/')}
+  });
+
+});
+
 //create post for register
 app.post("/register", (req, res) => {
 

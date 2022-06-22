@@ -250,3 +250,19 @@ app.post("/login", (req,res)=>{
 ```
 
 every login attempt will create a temporary user object for passport to check against db, if login passed, render the page.
+
+
+##### how to logout
+```javascript
+//create a app.get() for logout
+
+app.get('/logout', (req, res)=>{
+  req.logout(function(err){
+    if (err){
+      console.log(err);
+    } else {res.redirect('/')}
+  });
+});
+```
+
+note , the logout method requires a callback function now. just add a callback to log err if needed.
