@@ -199,3 +199,39 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 ```
+
+##### What is the purpose of using cookies and sessions?
+
+when we close the tab and browsing other site, if we didn't close our browser, when we enter the same route, we are kept as logged in, we don't need to enter password again.
+
+> Created
+Wednesday, June 22, 2022 at 5:13:51 PM
+Expires
+When the browsing session ends
+
+to achieve this , we need to create post method for register, and get method for secrets.
+
+```javascript
+//create post for register
+app.post("/register", (req, res) => {
+
+User.register({username:req.body.username}, req.body.password, (err,user)=>{//the register method take 3 params, username, passowrd, and an callback function.
+  if (err) {
+    console.log(err);
+    res.redirect("/register")
+  } else {
+    passport.authenticate("local")(req,res, ()=>{
+      res.redirect("/secrets")
+    })
+  }
+
+})
+});
+```
+```javascript
+// create the get route for secrets
+app.get("/secrets", (req,res)=>{
+  req.isAuthenticated()?res.render("secrets"): res.redirect("/login")
+})
+```
+---

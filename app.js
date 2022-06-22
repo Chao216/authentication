@@ -62,9 +62,25 @@ app.get("/register", (req, res) => {
   res.render("register")
 })
 
+// create the get route for secrets
+app.get("/secrets", (req,res)=>{
+  req.isAuthenticated()?res.render("secrets"): res.redirect("/login") //use isAuthenticated to check if the request is allowed.
+})
+
 //create post for register
 app.post("/register", (req, res) => {
 
+User.register({username:req.body.username}, req.body.password, (err,user)=>{//the register method take 3 params, username, passowrd, and an callback function.
+  if (err) {
+    console.log(err);
+    res.redirect("/register")
+  } else {
+    passport.authenticate("local")(req,res, ()=>{ //use local for authenticate method, callback function to redirect to "/secrets"
+      res.redirect("/secrets")
+    })
+  }
+
+})
 
 
 });
