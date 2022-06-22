@@ -204,10 +204,7 @@ passport.deserializeUser(User.deserializeUser());
 
 when we close the tab and browsing other site, if we didn't close our browser, when we enter the same route, we are kept as logged in, we don't need to enter password again.
 
-> Created <br/>
-> Wednesday, June 22, 2022 at 5:13:51 PM
-> Expires
-> When the browsing session ends
+> Created <br/> Wednesday, June 22, 2022 at 5:13:51 PM <br/> Expires <br/> When the browsing session ends
 
 to achieve this , we need to create post method for register, and get method for secrets.
 
