@@ -231,4 +231,22 @@ app.get("/secrets", (req,res)=>{
   req.isAuthenticated()?res.render("secrets"): res.redirect("/login")
 })
 ```
----
+
+##### create an post login
+
+```javascript
+//create post for login
+app.post("/login", (req,res)=>{
+  const user = new User ({
+    username:req.body.username,
+    password:req.body.password
+  })
+  req.login(user, (err)=>{
+    err? console.log(err):passport.authenticate("local")(req,res, ()=>{
+      res.render("secrets")
+    })
+  })
+});
+```
+
+every login attempt will create a temporary user object for passport to check against db, if login passed, render the page.

@@ -89,6 +89,18 @@ User.register({username:req.body.username}, req.body.password, (err,user)=>{//th
 
 app.post("/login", (req,res)=>{
 
+  const user = new User ({
+    username:req.body.username,
+    password:req.body.password
+  })
+
+  req.login(user, (err)=>{
+    err? console.log(err):passport.authenticate("local")(req,res, ()=>{
+      res.render("secrets")
+    })
+  })
+
+
 });
 
 
