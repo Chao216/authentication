@@ -266,3 +266,6 @@ app.get('/logout', (req, res)=>{
 ```
 
 note , the logout method requires a callback function now. just add a callback to log err if needed.
+----
+
+Please keep reading `continueREAD.md` for Google authentication and submit secrets.
