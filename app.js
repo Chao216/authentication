@@ -36,7 +36,8 @@ mongoose.connect("mongodb://localhost:27017/userDB");
 const userSchema = new mongoose.Schema({
   email: String,
   password: String,
-  googleId:String
+  googleId:String,
+  secret:[String]
 });
 
 
@@ -103,7 +104,42 @@ app.get("/register", (req, res) => {
 
 // create the get route for secrets
 app.get("/secrets", (req,res)=>{
-  req.isAuthenticated()?res.render("secrets"): res.redirect("/login") //use isAuthenticated to check if the request is allowed.
+  // req.isAuthenticated()?res.render("secrets"): res.redirect("/login") //use isAuthenticated to check if the request is allowed.
+User.find({secret:{$ne:null}}, (err, fundUser)=>{
+  if (err){
+    console.log(err);
+  } else {
+    if (fundUser){
+      console.log(fundUser);
+      console.log(typeof foundUser);
+      res.render("secrets", {toPass:fundUser})
+    }
+  }
+})
+})
+
+//create a sumbit get method
+
+app.get("/submit", (req,res)=>{
+  req.isAuthenticated()?res.render("submit"): res.redirect("/login") //use isAuthenticated to check if the request is allowed.
+})
+
+//also an post for sumbit
+
+app.post("/submit", (req,res)=>{
+  const newSecret = req.body.secret;
+  User.findById(req.user.id, (err, fundUser)=>{ //the passport package will bring user info in the req for submit
+      if (err){
+        console.log(err);
+      } else {
+        if (fundUser){
+          fundUser.secret.push(newSecret);
+          fundUser.save(()=>{//an callback to redirect to secrets
+            res.redirect("/secrets")
+          })
+        }
+      }
+  })
 })
 
 //create a app.get() for logout
