@@ -85,3 +85,17 @@ passport.deserializeUser(function(user, cb) {
   });
 });
 ```
+### 6.2.5 add a file in userSchema for googleId
+
+```JavaScript
+const userSchema = new mongoose.Schema({
+  email: String,
+  password: String,
+  googleId:String,
+  secret:[String]
+});
+```
+
+by now, you should be able to login with google
+
+-----------
