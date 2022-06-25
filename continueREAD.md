@@ -99,3 +99,85 @@ const userSchema = new mongoose.Schema({
 by now, you should be able to login with google
 
 -----------
+
+# 7. Let users be able to share their secrets.
+
+## 7.1 create a  `app.get("/submit")`
+
+```JavaScript
+app.get("/submit", (req,res)=>{
+  req.isAuthenticated()?res.render("submit"): res.redirect("/login") //use isAuthenticated to check if the request is allowed.
+})
+```
+
+## 7.2 set the `app.post("/submit")`
+
+```JavaScript
+app.post("/submit", (req,res)=>{
+  const newSecret = req.body.secret;
+  User.findById(req.user.id, (err, fundUser)=>{ //the passport package will bring user info in the req for submit
+      if (err){
+        console.log(err);
+      } else {
+        if (fundUser){
+          fundUser.secret.push(newSecret);
+          fundUser.save(()=>{//an callback to redirect to secrets
+            res.redirect("/secrets")
+          })
+        }
+      }
+  })
+})
+```
+
+remember that we altered the schema, Secret field are array objects, so we push new secrets to the secrets array.
+
+## 7.3 update the `app.get("/secrets")`
+the submit post will push new secrets to the secrets array in user document, and redirect to secrets route.
+
+```JavaScript
+app.get("/secrets", (req,res)=>{
+  // req.isAuthenticated()?res.render("secrets"): res.redirect("/login") //use isAuthenticated to check if the request is allowed.
+User.find({secret:{$ne:null}}, (err, foundUser)=>{ //looking for users with secrets
+  if (err){
+    console.log(err);
+  } else {
+    if (foundUser){
+      console.log(fundUser);
+      console.log(typeof foundUser);
+      res.render("secrets", {toPass:foundUser}) //useing ejs to pass  foundUser to secrets.ejs
+    }
+  }
+})
+})
+```
+
+## 7.4 update the secrets.ejs
+
+Note we passed an array of user documents to secrets.ejs
+
+and inside each user document, the secret filed is an array itself
+
+so we will use forEach twice here.
+
+
+```JavaScript
+<%toPass.forEach((user)=>{%> //passed from app.js
+  <% var secret = user.secret %>
+  <%  secret.forEach((item)=>{ %>  //secret is an array object
+      <p class="secret-text"><%= item %></p>
+    <%})%>
+<%})%>
+```
+
+---
+
+## after finishing , you should see
+
+the google login prompt
+
+![google login](./public/images/google-login.png)
+
+and the secrets in database
+
+![secrets](./public/imgages/secrets.png)

@@ -105,14 +105,14 @@ app.get("/register", (req, res) => {
 // create the get route for secrets
 app.get("/secrets", (req,res)=>{
   // req.isAuthenticated()?res.render("secrets"): res.redirect("/login") //use isAuthenticated to check if the request is allowed.
-User.find({secret:{$ne:null}}, (err, fundUser)=>{
+User.find({secret:{$ne:null}}, (err, foundUser)=>{
   if (err){
     console.log(err);
   } else {
-    if (fundUser){
-      console.log(fundUser);
+    if (foundUser){
+      console.log(foundUser);
       console.log(typeof foundUser);
-      res.render("secrets", {toPass:fundUser})
+      res.render("secrets", {toPass:foundUser})
     }
   }
 })
