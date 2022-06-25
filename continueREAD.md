@@ -180,4 +180,4 @@ the google login prompt
 
 and the secrets in database
 
-![secrets](./public/imgages/secret.png)
+![secrets](./public/images/secrets.png)
